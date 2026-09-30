@@ -1,127 +1,189 @@
-# Método Simplex (Primal e Dual) — Implementação em Python
+<div align="center">
 
-## 📘 Descrição
+# Pesquisa Operacional em Python
 
-Este projeto implementa o **Método Simplex Primal e Dual** para resolução de problemas de **Programação Linear (PL)** e **Programação Inteira (PI)**. Além disso, foram incluídas implementações para resolver problemas clássicos de Pesquisa Operacional:
+**Implementações didáticas de otimização para estudo e experimentação com Programação Linear e Programação Inteira.**
 
-* ✅ Problema da **Mochila 0-1**
-* ✅ Problema do **Caixeiro-Viajante**
-* ✅ Problema de **Orçamento de Capital**
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-F37626?logo=jupyter&logoColor=white)
+![PuLP](https://img.shields.io/badge/Otimização-PuLP-2C3E50)
+![Status](https://img.shields.io/badge/status-projeto%20didático-informational)
 
----
-
-## ⚙️ Funcionalidades
-
-* ✔️ Resolve problemas de **maximização** e **minimização**;
-* ✔️ Suporta restrições `<=`, `>=` e `=`;
-* ✔️ Adiciona automaticamente variáveis de folga, excesso e artificiais;
-* ✔️ Executa pivoteamento Gauss-Jordan com seleção automática do método: **Primal** ou **Dual**;
-* ✔️ Suporte a modelagens com variáveis binárias e inteiras (via `Pulp`);
-* ✔️ Visualização de resultados e rotas com gráficos (usando `Matplotlib`);
-* ✔️ Cálculo e exibição da **função objetivo simbólica** para interpretação.
+</div>
 
 ---
 
-## 📂 Estrutura do Projeto
+## Sobre o projeto
 
-```
+Este repositório reúne implementações e exemplos de **Pesquisa Operacional** em Python, com foco em modelagem matemática, resolução de problemas de otimização e interpretação dos resultados.
+
+O projeto combina uma implementação didática própria dos métodos **Simplex Primal e Dual** com modelos de **Programação Inteira** resolvidos por meio do **PuLP/CBC**.
+
+### Conteúdos disponíveis
+
+| Tema | Abordagem | Arquivo |
+| --- | --- | --- |
+| Simplex Primal e Dual | Implementação própria com NumPy | [`dual-simplex.ipynb`](dual-simplex.ipynb) |
+| Problema da Mochila 0-1 | Programação inteira binária com PuLP | [`mochila.ipynb`](mochila.ipynb) |
+| Problema do Caixeiro-Viajante (TSP) | Formulação MTZ com PuLP | [`caixeiro-viajante.ipynb`](caixeiro-viajante.ipynb) |
+| Orçamento de Capital | Seleção binária de projetos com restrições anuais | [`fabrica.ipynb`](fabrica.ipynb) |
+
+---
+
+## Estrutura do repositório
+
+```text
+.
 ├── classes/
-│   └── ClassCaixerio.py   # Contém a clases do caixeiro viajante com funções auxiliares
-│   └── ClassMochila.py    # Contém a clases da mochila com funções auxiliares
-│   └── SimplexSolver.py   # Contém a clases para resolver o simplex ou o dual simplex e com funções auxiliares
-├── dual-simplex.ipynb        # Problema da Mochila com visualização
-├── mochila.ipynb             # Problema da Mochila com visualização
-├── caixeiro.ipynb            # Caixeiro-Viajante com solver MTZ
-├── investimento.ipynb        # Modelo binário de orçamento de capital
-└── localizacao.ipynb         # Problema de localização de facilidades
+│   ├── ClassCaixeiro.py      # Funções auxiliares e solver MTZ para o TSP
+│   ├── ClassMochileiro.py    # Classe reutilizável para o problema da mochila
+│   └── SimplexSolver.py      # Implementação didática do Simplex Primal/Dual
 ├── src/
-│   └── *.xlsx / *.csv         # Dados opcionais para testes ou importação
+│   └── dados_entrada.txt     # Exemplo de dados gerados para testes do Simplex
+├── caixeiro-viajante.ipynb  # Exemplo do Problema do Caixeiro-Viajante
+├── dual-simplex.ipynb        # Exemplos de Simplex Primal e Dual
+├── fabrica.ipynb             # Exemplo de orçamento de capital
+├── mochila.ipynb             # Exemplo do Problema da Mochila
+├── requirements.txt          # Dependências do projeto
+├── .gitignore
 └── README.md
 ```
 
 ---
 
-## 🧮 Entradas esperadas pelo Simplex
+## Como executar
 
-```python
-c = [...]               # Coeficientes da função objetivo
-A = [[...], [...]]      # Matriz de coeficientes das restrições
-b = [...]               # Termos do lado direito das restrições
-constraints = ['<=', '>=', '=']  # Lista de sinais
-problem_type = 'max' or 'min'    # Tipo do problema
-```
-
----
-
-## 🧠 Exemplos Resolvidos
-
-### 🎒 Problema da Mochila
-
-Seleciona os itens mais valiosos dentro de um limite de peso usando programação inteira binária. Inclui:
-
-* Lista de objetos, pesos e utilidades
-* Visualização da solução
-* Classe Python reutilizável para diferentes instâncias
-
-### 📍 Problema do Caixeiro-Viajante (TSP)
-
-Busca o caminho mínimo que passa por todas as cidades exatamente uma vez e retorna à origem. Inclui:
-
-* Formulação com restrições MTZ
-* Gráfico com as rotas e subrotas
-* Solução exata via Pulp
-
-### 💰 Problema de Investimento (Orçamento de Capital)
-
-Modelo binário para seleção de projetos sob restrição orçamentária, maximizando o VPL:
-
-* Entrada via listas
-* Saída com projetos escolhidos e função objetivo simbólica
-
-### 🏭 Localização de Facilidades
-
-Seleciona fábricas que devem ser abertas, minimizando custo fixo + transporte, respeitando capacidade e demanda.
-
----
-
-## 💻 Requisitos
-
-* Python 3.x
-* Bibliotecas:
+### 1. Clone o repositório
 
 ```bash
-pip install numpy pulp matplotlib pandas scipy
+git clone https://github.com/MatheusRodrigues-Dev/Pesquisa-Operacional-Simplex.git
+cd Pesquisa-Operacional-Simplex
+```
+
+### 2. Crie um ambiente virtual
+
+```bash
+python -m venv .venv
+```
+
+**Windows:**
+
+```bash
+.venv\Scripts\activate
+```
+
+**Linux/macOS:**
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Instale as dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Abra os notebooks
+
+```bash
+jupyter lab
 ```
 
 ---
 
-## 📊 Funcionamento do Método Simplex
+## Exemplo rápido — Simplex
 
-1. **Pré-processamento:** adapta o problema para o formato padrão (max, RHS positivo)
-2. **Seleção do Método:** aplica Primal ou Dual com base na viabilidade inicial
-3. **Resolução iterativa:** realiza pivoteamento até encontrar solução ótima
-4. **Saída:** apresenta valores ótimos e identifica o método utilizado
+A classe `SimplexSolver` recebe os coeficientes da função objetivo, a matriz de restrições, o lado direito e o tipo de cada restrição.
+
+```python
+from classes.SimplexSolver import SimplexSolver
+
+c = [320, 530]
+A = [
+    [2, 1],
+    [1, 3],
+]
+b = [4, 6]
+constraints = ["<=", "<="]
+
+solver = SimplexSolver(
+    c=c,
+    A=A,
+    b=b,
+    constraints=constraints,
+    problem_type="max",
+)
+
+solution, optimal_value = solver.solve()
+
+print("Solução:", solution)
+print("Valor ótimo:", optimal_value)
+```
+
+Durante a resolução, o solver imprime os **tableaux de cada iteração**, permitindo acompanhar o processo de pivoteamento.
 
 ---
 
-## 📎 Observações
+## Modelos implementados
 
-* Problemas com **duas variáveis** podem ser representados graficamente.
-* Para problemas inteiros e binários, o projeto utiliza o solver **Pulp + CBC**.
-* Para o TSP e Localização de Facilidades, foram utilizados algoritmos exatos e heurísticas.
+### Simplex Primal e Dual
+
+A implementação em [`classes/SimplexSolver.py`](classes/SimplexSolver.py) utiliza NumPy para construir e atualizar os tableaux. O código escolhe entre o procedimento primal e o dual de acordo com a forma inicial do problema após o pré-processamento das restrições.
+
+### Mochila 0-1
+
+O notebook [`mochila.ipynb`](mochila.ipynb) utiliza a classe `KnapsackSolver`, baseada em PuLP, para escolher um subconjunto de itens que maximize o valor total sem ultrapassar a capacidade disponível.
+
+### Caixeiro-Viajante
+
+O notebook [`caixeiro-viajante.ipynb`](caixeiro-viajante.ipynb) modela o TSP com variáveis binárias e restrições **MTZ (Miller–Tucker–Zemlin)** para eliminação de sub-rotas. O projeto também possui funções para cálculo da matriz de distâncias e visualização da rota.
+
+### Orçamento de Capital
+
+O notebook [`fabrica.ipynb`](fabrica.ipynb) apresenta um problema de seleção de projetos: o objetivo é maximizar o VPL total respeitando limites de investimento em diferentes períodos.
 
 ---
 
-## 📚 Referências
+## Dependências principais
 
-* Taha, H. A. – Pesquisa Operacional
-* Hillier & Lieberman – Introduction to Operations Research
-* Chopra & Meindl – Supply Chain Management
-* Documentação oficial do [`Pulp`](https://coin-or.github.io/pulp/)
+- **NumPy** — operações matriciais e implementação do Simplex;
+- **PuLP** — modelagem de Programação Linear/Inteira;
+- **SciPy** — cálculo de distâncias no exemplo do TSP;
+- **Pandas** — apresentação tabular das matrizes;
+- **Matplotlib** — visualização gráfica;
+- **Jupyter** — execução interativa dos exemplos.
+
+A lista completa está em [`requirements.txt`](requirements.txt).
 
 ---
 
-## 👨‍💻 Autor
+## Limitações atuais
+
+Este é um projeto **didático**, pensado para estudo e demonstração dos conceitos de Pesquisa Operacional.
+
+- A implementação própria do Simplex não pretende substituir solvers numéricos de produção;
+- o tratamento atual das restrições não implementa um procedimento completo de **Fase I/Fase II** com variáveis artificiais;
+- os modelos inteiros dependem do solver utilizado pelo PuLP, normalmente o CBC;
+- casos degenerados, problemas numericamente difíceis ou formulações mais gerais podem exigir tratamento adicional.
+
+Essas limitações são mantidas explícitas para diferenciar a implementação educacional de bibliotecas de otimização destinadas a uso industrial.
+
+---
+
+## Referências
+
+- TAHA, Hamdy A. *Operations Research: An Introduction*.
+- HILLIER, Frederick S.; LIEBERMAN, Gerald J. *Introduction to Operations Research*.
+- DANTZIG, George B. *Linear Programming and Extensions*.
+- [PuLP — documentação oficial](https://coin-or.github.io/pulp/)
+
+---
+
+## Autor
 
 **Matheus Rodrigues**
-Projeto acadêmico para fins didáticos — Engenharia de Produção / Pesquisa Operacional
+
+[GitHub](https://github.com/MatheusRodrigues-Dev)
+
+> Projeto acadêmico e didático voltado ao estudo de Pesquisa Operacional, Programação Linear e Programação Inteira.
